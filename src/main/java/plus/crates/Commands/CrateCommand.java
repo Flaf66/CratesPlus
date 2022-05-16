@@ -47,14 +47,14 @@ public class CrateCommand implements CommandExecutor {
                 doClaim((Player) sender);
                 return true;
             }
-            sender.sendMessage(cratesPlus.getPluginPrefix() + MessageHandler.getMessage("&cYou do not have the correct permission to run this command", (Player) sender, null, null));
+            sender.sendMessage(cratesPlus.getPluginPrefix() + MessageHandler.getMessage("&6&lU&e&lC &8» &cNie masz permisji do tej komendy.", (Player) sender, null, null));
             return false;
         }
 
         if (args.length >= 1) {
             switch (args[0].toLowerCase()) {
                 default:
-                    sender.sendMessage(cratesPlus.getPluginPrefix() + ChatColor.RED + "Unknown arg");
+                    sender.sendMessage(cratesPlus.getPluginPrefix() + ChatColor.RED + "&6&lU&e&lC &8» Nie poprawny argument.");
                     break;
                 case "testmessages":
                     MessageHandler.testMessages = !MessageHandler.testMessages;
@@ -182,7 +182,7 @@ public class CrateCommand implements CommandExecutor {
                     break;
                 case "reload":
                     cratesPlus.reloadPlugin();
-                    sender.sendMessage(cratesPlus.getPluginPrefix() + ChatColor.GREEN + "CratesPlus was reloaded - This feature is not fully supported and may not work correctly");
+                    sender.sendMessage(cratesPlus.getPluginPrefix() + ChatColor.GREEN + "&6&lU&e&lC &8» &aPomyslnie zrobiono reload.");
                     break;
                 case "settings":
                     if (!(sender instanceof Player)) {
@@ -428,19 +428,7 @@ public class CrateCommand implements CommandExecutor {
         } else {
 
             // Help Messages
-            sender.sendMessage(cratesPlus.getPluginPrefix() + ChatColor.AQUA + "----- CratePlus v" + cratesPlus.getDescription().getVersion() + " Help -----");
-            sender.sendMessage(cratesPlus.getPluginPrefix() + ChatColor.AQUA + "/crate reload " + ChatColor.YELLOW + "Reload configuration for CratesPlus (Experimental)");
-//			sender.sendMessage(cratesPlus.getPluginPrefix() + ChatColor.AQUA + "/crate settings " + ChatColor.YELLOW + "Edit settings of CratesPlus and crate winnings");
-            sender.sendMessage(cratesPlus.getPluginPrefix() + ChatColor.AQUA + "/crate create <name> " + ChatColor.YELLOW + "Create a new crate");
-            sender.sendMessage(cratesPlus.getPluginPrefix() + ChatColor.AQUA + "/crate rename <old name> <new name> " + ChatColor.YELLOW + "Rename a crate");
-            sender.sendMessage(cratesPlus.getPluginPrefix() + ChatColor.AQUA + "/crate delete <name> " + ChatColor.YELLOW + "Delete a crate");
-            sender.sendMessage(cratesPlus.getPluginPrefix() + ChatColor.AQUA + "/crate give <player/all> [crate] [amount] " + ChatColor.YELLOW + "Give player a crate/key, if no crate given it will be random");
-            sender.sendMessage(cratesPlus.getPluginPrefix() + ChatColor.AQUA + "/crate crate <type> [player] " + ChatColor.YELLOW + "Give player a crate to be placed, for use by admins");
-            sender.sendMessage(cratesPlus.getPluginPrefix() + ChatColor.AQUA + "/crate debug " + ChatColor.YELLOW + "Generates a debug link for sending info about your server and config");
-//			sender.sendMessage(cratesPlus.getPluginPrefix() + ChatColor.AQUA + "/crate claim " + ChatColor.YELLOW + "Claim any keys that are waiting for you");
-
-
-            //			sender.sendMessage(cratesPlus.getPluginPrefix() + ChatColor.AQUA + "/crate opener <name/type> <opener> " + ChatColor.YELLOW + "- Change the opener for a specific crate or crate type");
+     		sender.sendMessage(cratesPlus.getPluginPrefix() + ChatColor.GREEN + "/crate claim " + ChatColor.GRAY + "Odbierz wszystkie klucze ktore na ciebie czekaja");
         }
 
         return true;
@@ -449,7 +437,7 @@ public class CrateCommand implements CommandExecutor {
     private void doClaim(Player player) {
         if (!cratesPlus.getCrateHandler().hasPendingKeys(player.getUniqueId())) {
             player.closeInventory();
-            player.sendMessage(ChatColor.RED + "You currently don't have any keys to claim");
+            player.sendMessage(ChatColor.RED + "Nie masz do odebrania zadnych kluczy!");
             return;
         }
         GUI gui = new GUI("Claim Crate Keys");
